@@ -6,7 +6,7 @@ import subprocess
 from truefoundry.ml import get_client, ArtifactPath
 
 
-def evaluate_model(model_name, task_name, batch_size=6):
+def evaluate_model(model_name, task_name, batch_size):
     # run the process
     run_name = model_name.replace("/", "__") + "__" + task_name
     bashCommand = "lm_eval --model hf --model_args pretrained={model_name},dtype=float --tasks {task_name} --device cuda:0 --batch_size {batch_size} --output_path ./results --log_samples --limit 10  --wandb_args project=lm-eval-harness-integration,name={run_name}".format(
@@ -63,13 +63,6 @@ if __name__ == "__main__":
         help='Batch Size'
     )
     
-    parser.add_argument(
-        '--wandb_path', 
-        type=str, 
-        required=True, 
-        help='Folder name for wandb metrics logging'
-    )
-
     args = parser.parse_args()
 
     # Train the model
