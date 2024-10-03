@@ -64,7 +64,6 @@ if __name__ == "__main__":
     )
     
     args = parser.parse_args()
-
     # Train the model
     evaluate_model(**vars(args))
     
