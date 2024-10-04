@@ -16,7 +16,7 @@ def evaluate_model(model_name, task_name, batch_size):
 
     client = get_client()
     # create an ML repo run
-    run = client.create_run(ml_repo="llm_evaluation", run_name=run_name)
+    run = client.create_run(ml_repo="lm-evaluation", run_name=run_name)
     run.log_params({
         "model_name": model_name,
         "task_name": task_name
@@ -62,6 +62,11 @@ if __name__ == "__main__":
         required=True,  
         help='Batch Size'
     )
+    # parser.add_argument(
+    #     '--limit'
+    #     type=str
+    #     help="Specify the number of samples to test on like '--limit 10' if you need to test out the code."
+    # )
     
     args = parser.parse_args()
     # Train the model
