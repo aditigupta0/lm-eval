@@ -38,6 +38,7 @@ def evaluate_model(model_name, task_name, batch_size):
             if "none" in metric:
                 metric_dict[metric.split(",")[0]] = value
     run.log_metrics(metric_dict)
+    run.end()
 
 
 if __name__ == "__main__":
