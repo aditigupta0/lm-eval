@@ -23,7 +23,7 @@ def evaluate_model(model_name, task_name, batch_size):
     })
 
     # Log artifacts
-    folder_path = os.getcwd() + "/results/" + re.sub(r'[^a-zA-Z0-9]', '-', model_name)
+    folder_path = os.getcwd() + "/results/" + model_name.replace("/", "__")
     all_files = os.listdir(folder_path)
     # pos = len(folder_path)        
     run.log_artifact(name=run_name, artifact_paths=[ArtifactPath(src=folder_path, dest=folder_path)])
