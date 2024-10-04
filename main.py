@@ -26,7 +26,7 @@ def evaluate_model(model_name, task_name, batch_size):
     folder_path = os.getcwd() + "/results/" + model_name.replace("/", "__")
     all_files = os.listdir(folder_path)
     # pos = len(folder_path)        
-    run.log_artifact(name=run_name, artifact_paths=[ArtifactPath(src=file, dest=file) for file in all_files])
+    run.log_artifact(name=run_name, artifact_paths=[ArtifactPath(src=folder_path, dest=folder_path)])
 
     # Log metrics
     metric_file_name = max([f for f in all_files if os.path.isfile(os.path.join(folder_path, f)) and re.match("results_*", f)])
