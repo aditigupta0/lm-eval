@@ -6,12 +6,12 @@ import subprocess
 from truefoundry.ml import get_client, ArtifactPath
 
 
-def evaluate_model(model_name, task_name, batch_size, limit=None):
+def evaluate_model(model_name, task_name, batch_size, limit):
     # run the process
     run_name = re.sub(r'[^a-zA-Z0-9]', '-', model_name+"-"+task_name)
     bashCommand = "lm_eval --model hf --model_args pretrained={model_name},dtype=float --tasks {task_name} --device cuda:0 --batch_size {batch_size} --output_path ./results --log_samples --wandb_args project=lm-eval-harness-integration,name={run_name}".format(
         model_name=model_name, task_name=task_name, batch_size=batch_size, run_name=run_name)
-    if limit is not "all":
+    if limit != "all":
         bashCommand += " --limit " + str(limit)
 
     process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
